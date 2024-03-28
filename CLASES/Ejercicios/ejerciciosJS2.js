@@ -31,7 +31,24 @@ console.log(conection(0));
 console.log(conection(1));
 console.log(conection(2));
 
-function saludo(idioma) {
+
+//-----------------------------------------------------------
+const saludo = idioma => {
+  switch (idioma) {
+    case "aleman":
+      return "Guten tag!"
+    case "mandarin":
+      return "Ni Hao!"
+    case "ingles":
+      return "Hello!"
+    default:
+      return "Hola!"
+  }
+} 
+console.log(saludo(""));
+
+
+//function saludo(idioma) {
   // Devuelve un saludo en tres diferentes lenguajes:
   // Si "idioma" es "aleman", devuelve "Guten Tag!"
   // Si "idioma" es "mandarin", devuelve "Ni Hao!"
@@ -39,9 +56,13 @@ function saludo(idioma) {
   // Si "idioma" no es ninguno de los anteiores o es `undefined` devuelve "Hola!"
   // Tu código:
 
-}
+//}
+//---------------------------------------------------------
 
-function colors(color) {
+//-------------------------------------------------------
+
+
+const colors = color=> {
   //La función recibe un color. Devolver el string correspondiente:
   //En caso que el color recibido sea "blue", devuelve --> "This is blue"
   //En caso que el color recibido sea "red", devuelve --> "This is red"
@@ -49,25 +70,45 @@ function colors(color) {
   //En caso que el color recibido sea "orange", devuelve --> "This is orange"
   //Caso default: devuelve --> "Color not found"
   //Usar el statement Switch.
+  switch (color) {
+    case "blue":
+      return "This is blue"
+    case "red":
+      return "This is red"
+    case "green":
+      return "This is green"
+    case "orange":
+      return "This is orange"
+    default:
+      return "Color not found"
+  }
+} 
+console.log(colors(""));
 
 
-}
+//------------------------------------------------
 
-function esDiezOCinco(numero) {
+//------------------------------------------------
+const esDiezOCinco = numero => numero === 10 ? true : numero === 5 ? true : false
+console.log(esDiezOCinco(10));
   // Devuelve "true" si "numero" es 10 o 5
   // De lo contrario, devuelve "false"
   // Tu código:
+//------------------------------------------------
 
-}
 
-function estaEnRango(numero) {
+const estaEnRango = numero => numero >20 && numero < 50
+console.log(estaEnRango(49));  
   // Devuelve "true" si "numero" es menor que 50 y mayor que 20
   // De lo contrario, devuelve "false"
   // Tu código:
 
-}
+//--------------------------------------------
 
-function esEntero(numero) {
+//-------------------------------------------
+
+const esEntero= numero => numero === Math.floor(numero)
+console.log(esEntero(2));
   // Devuelve "true" si "numero" es un entero (int/integer)
   // Ejemplo: 0.8 -> false
   // Ejemplo: 1 -> true
@@ -76,18 +117,35 @@ function esEntero(numero) {
   // Pista: Puedes resolver esto usando `Math.floor`
   // Tu código:
 
-}
+//-------------------------------------------------
 
-function fizzBuzz(numero) {
+
+//-------------------------------------------------
+
+const fizzBuzz = numero => numero % 3 == 0 && numero % 5 == 0  ? "fizzbuzz" : numero % 3 == 0 ? "fizz" : numero % 5 == 0 ? "buzz" : numero
   // Si "numero" es divisible entre 3, devuelve "fizz"
   // Si "numero" es divisible entre 5, devuelve "buzz"
   // Si "numero" es divisible entre 3 y 5 (ambos), devuelve "fizzbuzz"
   // De lo contrario, devuelve el numero
+  
 
+console.log(fizzBuzz(12345));
+
+//----------------------------------------------
+
+//-------------------------------------------------
+
+const operadoresLogicos = (num1, num2, num3)  => {
+  if (num1 == 0 || num2 == 0 || num3 == 0) return "Error"
+  if (num1 < 0 || num2 < 0 || num3 < 0) return "Hay negativos"
+  if (num1 > num2 && num1 > num3) return "Número 1 es mayor y positivo"
+  if (num3 > num1 && num3 > num2){
+    return num3 + 1
+  } else{
+    return false
+  }
 }
-
-
-function operadoresLogicos(num1, num2, num3) {
+console.log(operadoresLogicos(4,5,6));
   //La función recibe tres números distintos. 
   //Si num1 es mayor a num2 y a num3 y además es positivo, retornar ---> "Número 1 es mayor y positivo"
   //Si alguno de los tres números es negativo, retornar ---> "Hay negativos"
@@ -95,16 +153,64 @@ function operadoresLogicos(num1, num2, num3) {
   //0 no es ni positivo ni negativo. Si alguno de los argumentos es 0, retornar "Error".
   //Si no se cumplen ninguna de las condiciones anteriores, retornar false. 
 
-}
+//----------------------------------------------------
 
-function esPrimo(numero) {
+//-----------------------------------------------------
+
+const esPrimo = numero => numero % numero == 0 && numero % 1 == 0
+console.log(esPrimo(4));
   // Devuelve "true" si "numero" es primo
   // De lo contrario devuelve "falso"
   // Pista: un número primo solo es divisible por sí mismo y por 1
   // Pista 2: Puedes resolverlo usando un bucle `for`
   // Nota: Los números 0 y 1 NO son considerados números primos
 
+
+  //Utilizo regla de 6k masmenos 1 para reducir la cantidad de comprobaciones necesarias para determinar si es primo
+  /*
+  6x0+1 = 1(no es primo)
+  6x1-1 = 5 primo
+  6x1+1 = 7 primo
+  6x2-1= 11 primo
+  6x2+1 = 13 primo
+  6x3-1 = 17 primo
+  6x3+1 = 19 primo
+  6x4-1 = 23 primo
+  6x4+1 = 25 no primo
+  6x5-1= 29 primo
+  6x5+1= 31 primo
+  
+  si un numero tiene un divisor mayor que su raiz cuadrada, tambien lo tendra menor que su raiz cuadrada. Por eso, solo necesito verificar la division hasta su raiz cuadrada
+
+  */
+  function esPrimos(numero) {
+    if (numero <= 1) {//si es 1 o 0 devuelve false
+        return false;
+    }
+    if (numero <= 3) {//si es 2 o 3 devuelve true
+        return true;
+    }
+    if (numero % 2 === 0 || numero % 3 === 0) {// si es divisible por 2 o 3 devuelve false
+        return false;
+    }//en los casos del 5 hasta el 24 incluido no entra en el for porque o son primos o son divisibles por 2 o 3 por la regla de la raiz cuadrada
+    for (let i = 5; i * i <= numero; i += 6) {//itera hasta que la raiz de i sea mayor al numero a comprobar, arrancando de 5 y escalando de a 6.
+        if (numero % i === 0 || numero % (i + 2) === 0) {//si el numero es divisible por 5 o 7 devuelve false
+            
+            return false;
+        }
+    }
+    return true;
 }
+
+// Ejemplo de uso
+const num = 5;
+if (esPrimos(num)) {
+    console.log(num + " es primo");
+} else {
+    console.log(num + " no es primo");
+}
+
+//----------------------------------------------------------
 
 function esVerdadero(valor){
   //Escribe una función que reciba un valor booleano y retorne “Soy verdadero” 
